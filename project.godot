@@ -13,16 +13,28 @@ _global_script_classes=[ {
 "class": "CelestialObject",
 "language": "GDScript",
 "path": "res://Scenes/Actors/CelestialObjects/CelestialObject.gd"
+}, {
+"base": "Node2D",
+"class": "DefaultLevel",
+"language": "GDScript",
+"path": "res://Scenes/Levels/DefaultLevel.gd"
 } ]
 _global_script_class_icons={
-"CelestialObject": ""
+"CelestialObject": "",
+"DefaultLevel": ""
 }
 
 [application]
 
 config/name="Proto Gd"
-run/main_scene="res://Scenes/Actors/CelestialObjects/CelestialObject.tscn"
+run/main_scene="res://Scenes/Levels/DefaultLevel.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/fullscreen=true
 
 [physics]
 

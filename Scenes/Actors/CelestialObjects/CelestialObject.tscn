@@ -1,4 +1,4 @@
-[gd_scene load_steps=580 format=2]
+[gd_scene load_steps=581 format=2]
 
 [ext_resource path="res://Scenes/Actors/CelestialObjects/CelestialObject.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/IslandPlanet.png" type="Texture" id=2]
@@ -2315,14 +2315,18 @@ animations = [ {
 "speed": 16.0
 } ]
 
+[sub_resource type="CircleShape2D" id=578]
+radius = 65.123
+
 [node name="CelestialObject" type="RigidBody2D"]
-mass = 500.0
+rotation = 0.00580548
+mass = 100.0
 script = ExtResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 215 )
 frames = SubResource( 577 )
-frame = 426
+frame = 222
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 578 )
