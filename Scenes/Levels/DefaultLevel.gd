@@ -29,7 +29,7 @@ func _physics_process(_delta : float) -> void:
 
 #### LOGIC ####
 func _compute_forces() -> void:
-#	for _i in _ysort.get_children():
+	pass
 #		if _i.is_class("CelestialObject"):
 #			_i.set_applied_force(Vector2(0.0, 0.0))
 #			for _j in _ysort.get_children():
@@ -37,12 +37,12 @@ func _compute_forces() -> void:
 #					var grav = _compute_gravity(_i, _j)
 #					_i.set_applied_force(_i.get_applied_force() + grav)
 	
-	if _character.is_class("CelestialObject"):
-		_character.set_applied_force(Vector2(0.0, 0.0))
-		for _j in _ysort.get_children():
-			if _j.is_class("CelestialObject") and _character != _j:
-				var grav = _compute_gravity(_character, _j)
-				_character.set_applied_force(_character.get_applied_force() + grav)
+#	if _character.is_class("CelestialObject"):
+#		_character.set_applied_force(Vector2(0.0, 0.0))
+#		for _j in _ysort.get_children():
+#			if _j.is_class("CelestialObject") and _character != _j:
+#				var grav = _compute_gravity(_character, _j)
+#				_character.set_applied_force(_character.get_applied_force() + grav)
 
 func _compute_gravity(A : CelestialObject, B : CelestialObject) -> Vector2:
 	return Vector2(0.0, 0.0)

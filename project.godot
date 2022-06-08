@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CelestialObject",
+"class": "BasePlanet",
+"language": "GDScript",
+"path": "res://Scenes/Actors/CelestialObjects/Planets/BasePlanet.gd"
+}, {
 "base": "RigidBody2D",
 "class": "CelestialObject",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://Scenes/Levels/DefaultLevel.gd"
 } ]
 _global_script_class_icons={
+"BasePlanet": "",
 "CelestialObject": "",
 "DefaultLevel": ""
 }
