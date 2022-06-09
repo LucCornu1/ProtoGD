@@ -3,7 +3,6 @@
 [ext_resource path="res://Scenes/Actors/CelestialObjects/CelestialObject.gd" type="Script" id=1]
 
 [node name="CelestialObject" type="RigidBody2D"]
-rotation = 0.00580548
 mass = 100.0
 script = ExtResource( 1 )
 
