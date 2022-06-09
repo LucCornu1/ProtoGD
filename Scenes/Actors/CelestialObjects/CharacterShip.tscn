@@ -16,11 +16,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 8.88373
-height = 94.2073
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 58, 6.5 )
 
 [node name="CharacterShip" instance=ExtResource( 2 )]
+mode = 2
 mass = 1.0
 script = ExtResource( 3 )
 grav_scale = 1000.0
@@ -31,5 +31,5 @@ scale = Vector2( 0.394951, 0.394951 )
 frames = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-rotation = 1.5708
+position = Vector2( 0, 2.5 )
 shape = SubResource( 3 )

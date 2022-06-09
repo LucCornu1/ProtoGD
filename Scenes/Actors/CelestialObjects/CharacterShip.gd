@@ -25,7 +25,7 @@ func get_thruster_force() -> float:
 
 #### BUILT-IN ####
 func _ready() -> void:
-	pass
+	var __ = connect("body_entered", self, "_on_body_entered")
 
 func _physics_process(_delta : float) -> void:
 	apply_movement(_delta)
@@ -77,3 +77,5 @@ func action(action_name : String) -> void:
 
 
 #### SIGNAL RESPONSES ####
+func _on_body_entered(body : PhysicsBody2D) -> void:
+	print ("Hello There " + body.name + " !")

@@ -24,6 +24,8 @@ func _physics_process(_delta : float) -> void:
 	_compute_gravity(_delta)
 #	_apply_movement()
 
+func _process(_delta : float) -> void:
+	pass
 
 #### VIRTUALS ####
 
@@ -33,7 +35,7 @@ func _compute_gravity(_delta : float) -> void:
 	for body in attracting_bodies:
 		var distance : float = position.distance_squared_to(body.position) #pow(distance, 0.88)
 		var force : float = Singleton.grav_const * ((body.mass * mass) / distance)
-		var direction : Vector2 = position.direction_to(body.position) 
+		var direction : Vector2 = position.direction_to(body.position)
 		apply_central_impulse(force * direction * _delta * grav_scale)
 	
 #	applied_force = applied_force.clamped(max_force_length)
@@ -45,3 +47,5 @@ func _compute_gravity(_delta : float) -> void:
 
 
 #### SIGNAL RESPONSES ####
+func _on_collision_shape_2D_body_entered(body : PhysicsBody2D) -> void:
+	print(body)

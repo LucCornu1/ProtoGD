@@ -4,6 +4,8 @@
 
 [node name="CelestialObject" type="RigidBody2D"]
 mass = 100.0
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

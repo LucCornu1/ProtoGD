@@ -2324,12 +2324,13 @@ radius = 1119.0
 
 [node name="BasePlanet" instance=ExtResource( 1 )]
 mass = 1.0
+can_sleep = false
 script = ExtResource( 2 )
 grav_scale = 10.0
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 577 )
-frame = 457
+frame = 514
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 578 )
