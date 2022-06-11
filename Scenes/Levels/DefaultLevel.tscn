@@ -8,11 +8,12 @@
 script = ExtResource( 1 )
 
 [node name="BasePlanet2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1167, 694 )
+position = Vector2( 1249, 440 )
 mass = 1000.0
 
 [node name="CharacterShip" parent="." instance=ExtResource( 2 )]
 position = Vector2( 110, 189 )
+rotation = -0.174533
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 960, 540 )

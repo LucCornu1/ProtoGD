@@ -2330,7 +2330,7 @@ grav_scale = 10.0
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 577 )
-frame = 486
+frame = 60
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 578 )

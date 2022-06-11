@@ -43,10 +43,10 @@ func get_initial_thrusting_force() -> Vector2:
 
 #### BUILT-IN ####
 func _ready() -> void:
-	pass
+	_new_angle = rotation
 
 func _physics_process(_delta : float) -> void:
-	apply_movement(_delta)
+	pass
 
 func _process(_delta : float) -> void:
 	turn_ship()
@@ -56,13 +56,17 @@ func _process(_delta : float) -> void:
 
 
 #### LOGIC ####
-func apply_movement(_delta : float) -> void:
-#	applied_force = applied_force.clamped(40.0)
-	applied_force = initial_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle))
+func _compute_forces(_delta : float) -> void:
+	._compute_forces(_delta)
+	
+	print(current_gravity_force)
+	applied_force += initial_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle))
+	applied_force = applied_force.clamped(80.0)
 
 func turn_ship() -> void:
-	set_new_angle(lerp(_new_angle, linear_velocity.angle(), 0.75))
-	rotation = _new_angle
+	if linear_velocity.length() > 0.0:
+		set_new_angle(lerp(_new_angle, linear_velocity.angle(), 0.75))
+		rotation = _new_angle
 
 
 #### INPUTS ####

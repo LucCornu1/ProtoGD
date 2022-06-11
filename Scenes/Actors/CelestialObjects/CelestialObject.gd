@@ -11,6 +11,7 @@ export(float, 0, 1000) var grav_scale = 1.0
 
 # Variables
 var attracting_bodies : Array = []
+var current_gravity_force : Vector2 = Vector2.ZERO setget set_current_gravity_force, get_current_gravity_force
 
 # Signals
 signal gravity_well_entered
@@ -25,6 +26,14 @@ func append_to_attracting_bodies(body : PhysicsBody2D) -> void:
 func erase_from_attracting_bodies(body : PhysicsBody2D) -> void:
 	attracting_bodies.erase(body)
 	emit_signal("gravity_well_exited")
+
+func set_current_gravity_force(new_value : Vector2) -> void:
+	if new_value != current_gravity_force:
+		current_gravity_force = new_value
+#		emit_signal()
+
+func get_current_gravity_force() -> Vector2:
+	return current_gravity_force
 
 
 #### BUILT-IN ####
@@ -43,12 +52,16 @@ func _process(_delta : float) -> void:
 
 #### LOGIC ####
 func _compute_forces(_delta : float) -> void:
+	current_gravity_force = Vector2.ZERO
+	
 	for body in attracting_bodies:
 		if is_instance_valid(body):
 			var distance : float = position.distance_squared_to(body.position) #pow(distance, 0.88)
 			var force : float = Singleton.grav_const * ((body.mass * mass) / distance)
 			var direction : Vector2 = position.direction_to(body.position)
-			apply_central_impulse(force * direction * _delta * grav_scale)
+			current_gravity_force += force * direction * grav_scale
+	
+	applied_force = current_gravity_force
 
 
 #### INPUTS ####

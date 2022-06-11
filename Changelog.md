@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.3] - 11-06-2022
 ### Changed
 - Correction d'un bug octroyant la capacité au joueur d'appuyer plusieurs fois sur la touche pour propulser le vaisseau, et ainsi lui conférer une plus grande vitesse.
+- Changement de la gravité. Celle-ci s'effectue désormais avec la force, et non plus les impulsions pour un rendu plus réaliste.
 
 ## [0.0.2] - 10-06-2022
 ### Added
