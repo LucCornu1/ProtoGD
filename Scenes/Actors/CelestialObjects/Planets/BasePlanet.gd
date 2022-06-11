@@ -37,9 +37,9 @@ func _process(_delta : float) -> void:
 func _on_gravity_well_body_entered(body : Node) -> void:
 	if is_instance_valid(body):
 		if body != self and body.is_class("CelestialObject"):
-			body.attracting_bodies.append(self)
+			body.append_to_attracting_bodies(self)
 
 func _on_gravity_well_body_exited(body : Node) -> void:
 	if is_instance_valid(body):
 		if body != self and body.is_class("CelestialObject"):
-			body.attracting_bodies.erase(self)
+			body.erase_from_attracting_bodies(self)

@@ -24,7 +24,7 @@ mode = 2
 mass = 1.0
 script = ExtResource( 3 )
 grav_scale = 1000.0
-thruster_force = 5.0
+thruster_power = 15.0
 
 [node name="AnimatedSprite" parent="." index="0"]
 scale = Vector2( 0.2, 0.2 )

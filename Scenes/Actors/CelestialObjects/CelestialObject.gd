@@ -12,8 +12,19 @@ export(float, 0, 1000) var grav_scale = 1.0
 # Variables
 var attracting_bodies : Array = []
 
+# Signals
+signal gravity_well_entered
+signal gravity_well_exited
+
 
 #### ACCESSORS ####
+func append_to_attracting_bodies(body : PhysicsBody2D) -> void:
+	attracting_bodies.append(body)
+	emit_signal("gravity_well_entered")
+
+func erase_from_attracting_bodies(body : PhysicsBody2D) -> void:
+	attracting_bodies.erase(body)
+	emit_signal("gravity_well_exited")
 
 
 #### BUILT-IN ####
@@ -21,7 +32,7 @@ func _ready() -> void:
 	var __ = connect("body_entered", self, "_on_body_entered")
 
 func _physics_process(_delta : float) -> void:
-	_compute_gravity(_delta)
+	_compute_forces(_delta)
 
 func _process(_delta : float) -> void:
 	pass
@@ -31,7 +42,7 @@ func _process(_delta : float) -> void:
 
 
 #### LOGIC ####
-func _compute_gravity(_delta : float) -> void:
+func _compute_forces(_delta : float) -> void:
 	for body in attracting_bodies:
 		if is_instance_valid(body):
 			var distance : float = position.distance_squared_to(body.position) #pow(distance, 0.88)
