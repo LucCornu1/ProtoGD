@@ -96,8 +96,6 @@ func _physics_process(_delta : float) -> void:
 
 func _process(_delta : float) -> void:
 	turn_ship()
-	print(current_fuel)
-	print(current_thruster_power)
 
 
 #### VIRTUALS ####
@@ -105,7 +103,6 @@ func _compute_forces(_delta : float) -> void:
 	._compute_forces(_delta)
 	
 	applied_force += current_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle))
-	applied_force = applied_force.clamped(80.0)
 
 
 #### LOGIC ####
