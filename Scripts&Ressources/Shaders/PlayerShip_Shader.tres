@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform float dissolveState : hint_range(0, 1) = 0.0;
+uniform sampler2D dissolveNoise;
+
+void fragment()
+{
+	vec4 textureColor = texture(TEXTURE, UV);
+	
+	float brightness = texture(dissolveNoise, UV).r;
+	COLOR = textureColor;
+	COLOR.a *= step(dissolveState, brightness);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=8]
+
+[sub_resource type="NoiseTexture" id=9]
+seamless = true
+noise = SubResource( 8 )
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/dissolveState = 0.0
+shader_param/dissolveNoise = SubResource( 9 )

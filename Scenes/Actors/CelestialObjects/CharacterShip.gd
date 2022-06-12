@@ -11,6 +11,9 @@ export(float) var max_fuel = 100.0 setget set_max_fuel, get_max_fuel
 export(float, 1.0, 10.0) var fuel_consumption_rate = 5.0 setget set_fuel_consumption_rate, get_fuel_consumption_rate
 
 # Onready variables
+onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
+onready var animated_sprite : AnimatedSprite = get_node("AnimatedSprite")
+onready var animated_sprite_material : Material = animated_sprite.get_material()
 
 # Variables
 var _new_angle : float = 0.0 setget set_new_angle, get_new_angle
@@ -20,6 +23,11 @@ var current_thruster_power : float = 0.0 setget set_current_thruster_power, get_
 var current_thrusting_force : Vector2 = Vector2.ZERO setget set_current_thrusting_force, get_current_thrusting_force
 
 var current_fuel : float = max_fuel setget set_current_fuel, get_current_fuel
+
+var is_dead : bool = false setget set_is_dead, get_is_dead
+
+# Signals
+signal is_dead_changed
 
 
 #### ACCESSORS ####
@@ -95,22 +103,37 @@ func set_current_fuel(new_value : float) -> void:
 func get_current_fuel() -> float:
 	return current_fuel
 
+func set_is_dead(new_value : bool) -> void:
+	if new_value != is_dead:
+		is_dead = new_value
+		emit_signal("is_dead_changed")
+
+func get_is_dead() -> bool:
+	return is_dead
+
 
 #### BUILT-IN ####
 func _ready() -> void:
+#	init_shaders()
+	var __ = connect("is_dead_changed", self, "_on_is_dead_changed")
+	
 	_new_angle = rotation
 #	current_thruster_power = 20
 
 func _physics_process(_delta : float) -> void:
 	_compute_thrusting_force(_delta)
 
-func _process(_delta : float) -> void:
+func _process(_delta : float) -> void:	
 	turn_ship()
 #	print(current_thrusting_force.length())
 
 
 #### VIRTUALS ####
 func _compute_forces(_delta : float) -> void:
+	if is_dead:
+		linear_velocity = Vector2.ZERO
+		applied_force = Vector2.ZERO
+		return
 	._compute_forces(_delta)
 	
 	applied_force = current_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle)) + current_gravity_force
@@ -130,9 +153,22 @@ func _compute_thrusting_force(_delta : float) -> void:
 	set_current_thrusting_force(Vector2(cos(_new_angle), sin(_new_angle)) * current_thruster_power)
 
 func turn_ship() -> void:
-	if linear_velocity.length() > 0.0:
+	if !is_dead:
 		set_new_angle(linear_velocity.angle()) #lerp(_new_angle, linear_velocity.angle(), 0.75))
-		rotation = _new_angle
+	rotation = _new_angle
+
+func init_shaders() -> void:
+	var noise = OpenSimplexNoise.new()
+	# Configure
+	noise.seed = randi()
+	noise.octaves = 4
+	noise.period = 20.0
+	noise.persistence = 0.8
+	
+	animated_sprite_material.set_shader_param("dissolveNoise", noise.get_image(512, 512))
+
+func restart_scene() -> void:
+	get_tree().reload_current_scene()
 
 
 #### INPUTS ####
@@ -166,4 +202,8 @@ func action(action_name : String) -> void:
 func _on_body_entered(body : PhysicsBody2D) -> void:
 	if is_instance_valid(body):
 		if body.is_class("CelestialObject"):
-			queue_free()
+			set_is_dead(true)
+
+func _on_is_dead_changed() -> void:
+	if is_dead:
+		animation_player.play("Death")

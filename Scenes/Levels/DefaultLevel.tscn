@@ -25,11 +25,9 @@ texture = ExtResource( 5 )
 
 [node name="BarrenPlanet" parent="CelestialBodies" instance=ExtResource( 3 )]
 position = Vector2( 692, 495 )
-contacts_reported = 1
-contact_monitor = true
 
 [node name="CharacterShip" parent="CelestialBodies" instance=ExtResource( 2 )]
-position = Vector2( 68, 317 )
+position = Vector2( 682, 349 )
 
 [node name="LevelExit" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2349, 810 )
