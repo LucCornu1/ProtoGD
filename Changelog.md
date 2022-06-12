@@ -3,7 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [0.0.4] - 12-06-2022
 ### Added
-- Sprite du vaisseau
+- Sprite du vaisseau.
+- Sprite du fond.
+- Sprite d'une planète.
+- Ajout d'une planète 'morte'.
 
 ### Changed
 - La propulsion a été modifiée. Elle s'incrémente ou se décrémente lorsqu'elle entre en orbite (en fonction de l'orientation du vaisseau-joueur).

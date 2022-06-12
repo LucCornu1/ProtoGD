@@ -7,7 +7,7 @@
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 901, 1251 )
+region = Rect2( 0, 0, 2906, 3773 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -18,7 +18,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 14, 7 )
+extents = Vector2( 16, 11 )
 
 [node name="CharacterShip" instance=ExtResource( 2 )]
 mode = 2
@@ -28,9 +28,9 @@ grav_scale = 1000.0
 fuel_consumption_rate = 9.0
 
 [node name="AnimatedSprite" parent="." index="0"]
-position = Vector2( -3.55271e-15, -1 )
+position = Vector2( 3.55271e-15, 0 )
 rotation = 1.5708
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.03, 0.03 )
 frames = SubResource( 5 )
 
 [node name="CollisionShape2D" parent="." index="1"]
