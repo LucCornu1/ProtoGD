@@ -28,7 +28,7 @@ texture = ExtResource( 5 )
 position = Vector2( 692, 495 )
 
 [node name="CharacterShip" parent="CelestialBodies" instance=ExtResource( 2 )]
-position = Vector2( 89, 338 )
+position = Vector2( 273, 475 )
 
 [node name="LevelExit" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2349, 810 )

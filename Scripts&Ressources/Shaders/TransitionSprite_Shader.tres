@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts&Ressources/Noise/noise_tex.tres" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D dissolve_texture;
+uniform vec4 burn_color : hint_color = vec4(1);
+uniform float burn_size : hint_range(0, 2);
+uniform float dissolve_amount : hint_range(0, 1);
+uniform float emission_amount;
+
+void fragment() {
+	vec4 out_color = texture(TEXTURE, UV);
+
+	float sample = texture(dissolve_texture, UV).r;
+	float emission_value = 1.0 - smoothstep(dissolve_amount, dissolve_amount + burn_size, sample);
+	vec3 emission = burn_color.rgb * emission_value * emission_amount;
+	
+	COLOR = vec4(
+			max(out_color.rgb, emission), 
+			smoothstep(dissolve_amount - burn_size, dissolve_amount, sample) * out_color.a);
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/burn_color = Color( 0.976471, 0.356863, 0.0235294, 1 )
+shader_param/burn_size = 0.15
+shader_param/dissolve_amount = 0.0
+shader_param/emission_amount = 1.0
+shader_param/dissolve_texture = ExtResource( 1 )
