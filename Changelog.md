@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Sprite d'une planète.
 - Ajout d'une planète 'morte'.
 - Ajout d'une animation de défaite sur le vaisseau-joueur. La scène se relance peu de temps après.
+- Transition lorsqu'une scène se relance.
 
 ### Changed
 - La propulsion a été modifiée. Elle s'incrémente ou se décrémente lorsqu'elle entre en orbite (en fonction de l'orientation du vaisseau-joueur).

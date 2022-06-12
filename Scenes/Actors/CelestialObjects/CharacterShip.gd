@@ -157,17 +157,22 @@ func turn_ship() -> void:
 		set_new_angle(linear_velocity.angle()) #lerp(_new_angle, linear_velocity.angle(), 0.75))
 	rotation = _new_angle
 
-func init_shaders() -> void:
-	var noise = OpenSimplexNoise.new()
-	# Configure
-	noise.seed = randi()
-	noise.octaves = 4
-	noise.period = 20.0
-	noise.persistence = 0.8
-	
-	animated_sprite_material.set_shader_param("dissolveNoise", noise.get_image(512, 512))
+#func init_shaders() -> void:
+#	var noise = OpenSimplexNoise.new()
+#	# Configure
+#	noise.seed = randi()
+#	noise.octaves = 4
+#	noise.period = 20.0
+#	noise.persistence = 0.8
+#
+#	animated_sprite_material.set_shader_param("dissolveNoise", noise.get_image(512, 512))
 
 func restart_scene() -> void:
+	var image : Image = get_viewport().get_texture().get_data()
+	image.flip_y()
+	Singleton.screenshot = ImageTexture.new()
+	Singleton.screenshot.create_from_image(image)
+	
 	get_tree().reload_current_scene()
 
 

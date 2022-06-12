@@ -11,6 +11,8 @@ func get_class() -> String: return "Singleton"
 var game_speed : Dictionary = {STOP = 0, SLOW = 0.5, NORMAL = 1, FAST = 2, FOCUS = 4}
 var curr_game_speed : float = game_speed.NORMAL
 
+var screenshot : ImageTexture
+
 const grav_const : float = 6.67
 
 #### ACCESSORS ####

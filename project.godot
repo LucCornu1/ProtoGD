@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "LevelExit",
 "language": "GDScript",
 "path": "res://Scenes/Actors/LevelExit.gd"
+}, {
+"base": "Node2D",
+"class": "TransitionSprite",
+"language": "GDScript",
+"path": "res://Scenes/Levels/TransitionSprite.gd"
 } ]
 _global_script_class_icons={
 "BasePlanet": "",
 "CelestialObject": "",
 "CharacterShip": "",
 "DefaultLevel": "",
-"LevelExit": ""
+"LevelExit": "",
+"TransitionSprite": ""
 }
 
 [application]
