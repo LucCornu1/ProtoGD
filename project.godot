@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "DefaultLevel",
 "language": "GDScript",
 "path": "res://Scenes/Levels/DefaultLevel.gd"
+}, {
+"base": "Node2D",
+"class": "LevelExit",
+"language": "GDScript",
+"path": "res://Scenes/Actors/LevelExit.gd"
 } ]
 _global_script_class_icons={
 "BasePlanet": "",
 "CelestialObject": "",
 "CharacterShip": "",
-"DefaultLevel": ""
+"DefaultLevel": "",
+"LevelExit": ""
 }
 
 [application]
@@ -50,6 +56,9 @@ Singleton="*res://Scripts&Ressources/Singleton.gd"
 
 window/size/width=1920
 window/size/height=1080
+window/size/fullscreen=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [input]
 

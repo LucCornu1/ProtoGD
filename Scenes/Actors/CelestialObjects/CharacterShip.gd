@@ -6,6 +6,7 @@ func get_class() -> String: return "CharacterShip"
 
 # Export variables
 export(float) var max_thruster_power = 35.0 setget set_max_thruster_power, get_max_thruster_power
+export(float, 1.0, 10.0) var thruster_efficiency = 5.0 setget set_thruster_efficiency, get_thruster_efficiency
 export(float) var max_fuel = 100.0 setget set_max_fuel, get_max_fuel
 export(float, 1.0, 10.0) var fuel_consumption_rate = 5.0 setget set_fuel_consumption_rate, get_fuel_consumption_rate
 
@@ -29,6 +30,14 @@ func set_max_thruster_power(new_value : float) -> void:
 
 func get_max_thruster_power() -> float:
 	return max_thruster_power
+
+func set_thruster_efficiency(new_value : float) -> void:
+	if new_value != thruster_efficiency:
+		thruster_efficiency = new_value
+#		emit_signal()
+
+func get_thruster_efficiency() -> float:
+	return thruster_efficiency
 
 func set_max_fuel(new_value : float) -> void:
 	if new_value != max_fuel:
@@ -90,27 +99,35 @@ func get_current_fuel() -> float:
 #### BUILT-IN ####
 func _ready() -> void:
 	_new_angle = rotation
+#	current_thruster_power = 20
 
 func _physics_process(_delta : float) -> void:
 	_compute_thrusting_force(_delta)
 
 func _process(_delta : float) -> void:
 	turn_ship()
+#	print(current_thrusting_force.length())
 
 
 #### VIRTUALS ####
 func _compute_forces(_delta : float) -> void:
 	._compute_forces(_delta)
 	
-	applied_force += current_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle))
+	applied_force = current_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle)) + current_gravity_force
+###	applied_force = applied_force.clamped(80.0) #DO NOT DELETE !! This as for effect to make orbiting 100x easier at the cost of realism
 
 
 #### LOGIC ####
-func _compute_thrusting_force(_delta : float) -> void:
+func _compute_thrusting_force(_delta : float) -> void:	
 	if is_thrusting and current_fuel > 0:
-		set_current_thruster_power(current_thruster_power + _delta * 2)
-		set_current_thrusting_force(Vector2(cos(_new_angle), sin(_new_angle)) * current_thruster_power)
+		set_current_thruster_power(current_thruster_power + _delta * thruster_efficiency)
 		set_current_fuel(clamp(current_fuel - _delta * fuel_consumption_rate, 0.0, max_fuel))
+	elif current_gravity_force.length_squared() > 0:
+		var scalaire = current_thrusting_force.normalized().dot(current_gravity_force.normalized())
+		set_current_thruster_power(current_thruster_power + scalaire * _delta)
+#		print(scalaire * _delta)
+#		print(current_thruster_power)
+	set_current_thrusting_force(Vector2(cos(_new_angle), sin(_new_angle)) * current_thruster_power)
 
 func turn_ship() -> void:
 	if linear_velocity.length() > 0.0:

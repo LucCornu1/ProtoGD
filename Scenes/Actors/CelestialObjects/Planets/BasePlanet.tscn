@@ -2320,7 +2320,7 @@ animations = [ {
 radius = 60.0083
 
 [sub_resource type="CircleShape2D" id=579]
-radius = 1119.0
+radius = 734.001
 
 [node name="BasePlanet" instance=ExtResource( 1 )]
 mass = 1.0
@@ -2330,7 +2330,7 @@ grav_scale = 10.0
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 577 )
-frame = 60
+frame = 496
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 578 )

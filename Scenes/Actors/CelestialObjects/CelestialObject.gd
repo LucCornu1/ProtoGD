@@ -5,7 +5,7 @@ func is_class(value: String): return value == "CelestialObject" or .is_class(val
 func get_class() -> String: return "CelestialObject"
 
 # Export variables
-export(float, 0, 1000) var grav_scale = 1.0
+export(float, 0, 100000) var grav_scale = 1.0
 
 # Onready variables
 

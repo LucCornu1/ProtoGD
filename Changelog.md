@@ -1,6 +1,18 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.4] - 12-06-2022
+### Added
+- Sprite du vaisseau
+
+### Changed
+- La propulsion a été modifiée. Elle s'incrémente ou se décrémente lorsqu'elle entre en orbite (en fonction de l'orientation du vaisseau-joueur).
+- La propulsion est recalculée en fonction des changements externes.
+- Le sprite du vaisseau-joueur a été mis à jour avec la ressource appropriée.
+
+### TO-DO
+- Modifier la gestion de rotation du vaisseau-joueur.
+
 ## [0.0.3] - 11-06-2022
 ### Added
 - Le carburant a été ajouté au vaisseau-joueur. Celui-ci doit désormais gérer sa ressource de carburant ou sinon il tombera à court et ne pourra plus utiliser les moteurs.
