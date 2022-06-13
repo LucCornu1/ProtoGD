@@ -5,7 +5,7 @@ func is_class(value: String): return value == "CharacterShip" or .is_class(value
 func get_class() -> String: return "CharacterShip"
 
 # Export variables
-export(float) var max_thruster_power = 35.0 setget set_max_thruster_power, get_max_thruster_power
+export(float) var max_thruster_power = 50.0 setget set_max_thruster_power, get_max_thruster_power
 export(float, 1.0, 10.0) var thruster_efficiency = 5.0 setget set_thruster_efficiency, get_thruster_efficiency
 export(float) var max_fuel = 100.0 setget set_max_fuel, get_max_fuel
 export(float, 1.0, 10.0) var fuel_consumption_rate = 5.0 setget set_fuel_consumption_rate, get_fuel_consumption_rate
@@ -17,14 +17,15 @@ onready var animated_sprite_material : Material = animated_sprite.get_material()
 
 # Variables
 var _new_angle : float = 0.0 setget set_new_angle, get_new_angle
+var _is_charging : bool = false
 
-var is_thrusting : bool = false setget set_is_thrusting, get_is_thrusting
 var current_thruster_power : float = 0.0 setget set_current_thruster_power, get_current_thruster_power
 var current_thrusting_force : Vector2 = Vector2.ZERO setget set_current_thrusting_force, get_current_thrusting_force
 
 var current_fuel : float = max_fuel setget set_current_fuel, get_current_fuel
 
 var is_dead : bool = false setget set_is_dead, get_is_dead
+var is_launched : bool = false setget set_is_launched, get_is_launched
 
 # Signals
 signal is_dead_changed
@@ -71,14 +72,6 @@ func set_new_angle(new_value : float) -> void:
 func get_new_angle() -> float:
 	return _new_angle
 
-func set_is_thrusting(new_bool : bool) -> void:
-	if new_bool != is_thrusting:
-		is_thrusting = new_bool
-#		emit_signal()
-
-func get_is_thrusting() -> bool:
-	return is_thrusting
-
 func set_current_thruster_power(new_value : float) -> void:
 	if new_value != current_thruster_power:
 		current_thruster_power = new_value
@@ -111,6 +104,14 @@ func set_is_dead(new_value : bool) -> void:
 func get_is_dead() -> bool:
 	return is_dead
 
+func set_is_launched(new_value : bool) -> void:
+	if new_value != is_launched:
+		is_launched = new_value
+#		emit_signal()
+
+func get_is_launched() -> bool:
+	return is_launched
+
 
 #### BUILT-IN ####
 func _ready() -> void:
@@ -118,19 +119,21 @@ func _ready() -> void:
 	var __ = connect("is_dead_changed", self, "_on_is_dead_changed")
 	
 	_new_angle = rotation
-#	current_thruster_power = 20
 
 func _physics_process(_delta : float) -> void:
 	_compute_thrusting_force(_delta)
 
-func _process(_delta : float) -> void:	
+func _process(_delta : float) -> void:
+	if _is_charging:
+		_charging(_delta)
+	
 	turn_ship()
-#	print(current_thrusting_force.length())
+	print(current_thrusting_force.length())
 
 
 #### VIRTUALS ####
 func _compute_forces(_delta : float) -> void:
-	if is_dead:
+	if is_dead or !is_launched:
 		linear_velocity = Vector2.ZERO
 		applied_force = Vector2.ZERO
 		return
@@ -141,21 +144,25 @@ func _compute_forces(_delta : float) -> void:
 
 
 #### LOGIC ####
-func _compute_thrusting_force(_delta : float) -> void:	
-	if is_thrusting and current_fuel > 0:
-		set_current_thruster_power(current_thruster_power + _delta * thruster_efficiency)
-		set_current_fuel(clamp(current_fuel - _delta * fuel_consumption_rate, 0.0, max_fuel))
-	elif current_gravity_force.length_squared() > 0:
+func _compute_thrusting_force(_delta : float) -> void:
+	if current_gravity_force.length_squared() > 0:
 		var scalaire = current_thrusting_force.normalized().dot(current_gravity_force.normalized())
-		set_current_thruster_power(current_thruster_power + scalaire * _delta)
+		set_current_thruster_power(current_thruster_power + scalaire * _delta * 1.5)
 #		print(scalaire * _delta)
 #		print(current_thruster_power)
 	set_current_thrusting_force(Vector2(cos(_new_angle), sin(_new_angle)) * current_thruster_power)
 
 func turn_ship() -> void:
-	if !is_dead:
+	if !is_dead and is_launched:
 		set_new_angle(linear_velocity.angle()) #lerp(_new_angle, linear_velocity.angle(), 0.75))
 	rotation = _new_angle
+
+func _charging(_delta : float) -> void:
+	set_current_thruster_power(clamp(current_thruster_power + _delta * 10.0, 0.0, max_thruster_power))
+	
+	var charge = current_thruster_power / max_thruster_power
+#	print(charge)
+	animated_sprite_material.set_shader_param("charge", charge)
 
 #func init_shaders() -> void:
 #	var noise = OpenSimplexNoise.new()
@@ -194,10 +201,12 @@ func _input(event : InputEvent) -> void:
 func action(action_name : String) -> void:
 	match(action_name):
 		"MoveForward_Pressed":
-			set_is_thrusting(true)
+			_is_charging = true
 			
 		"MoveForward_Released":
-			set_is_thrusting(false)
+			set_is_launched(true)
+			_is_charging = false
+			animated_sprite_material.set_shader_param("charge", 0.0)
 			
 		_:
 			return

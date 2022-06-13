@@ -3,14 +3,14 @@
 [ext_resource path="res://Assets/Sprites/Ships/vaisseau-1a-illu2.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Actors/CelestialObjects/CelestialObject.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Actors/CelestialObjects/CharacterShip.gd" type="Script" id=3]
-[ext_resource path="res://Scripts&Ressources/Shaders/PlayerShip_Shader.tres" type="Material" id=4]
+[ext_resource path="res://Scripts&Ressources/Shaders/CharacterShip_Shaders.tres" type="Material" id=4]
 
 [sub_resource type="Animation" id=8]
 resource_name = "Death"
 length = 2.0
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:material:shader_param/dissolveState")
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/dissolve_state")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -63,7 +63,7 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:material:shader_param/dissolveState")
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/dissolve_state")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
