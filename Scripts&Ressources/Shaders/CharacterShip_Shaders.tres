@@ -53,5 +53,5 @@ shader = SubResource( 10 )
 shader_param/dissolve_state = 0.0
 shader_param/width = 30.0
 shader_param/outline_color = Color( 1, 1, 1, 1 )
-shader_param/charge = 0.431
+shader_param/charge = 0.0
 shader_param/dissolve_noise = SubResource( 13 )

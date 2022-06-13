@@ -22,7 +22,7 @@ onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 #### BUILT-IN ####
 func _ready() -> void:
 	sprite_node.texture = Singleton.screenshot
-	sprite_node.set_scale(Vector2(1.25, 1.25)) ### HOTFIX : Will not work for every PC
+#	sprite_node.set_scale(Vector2(1.25, 1.25)) ### HOTFIX : Will not work for every PC
 	animation_player.play("RESET")
 	animation_player.play("Transition")
 
