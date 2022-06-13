@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## [0.0.5] - 13-06-2022
 ### Added
 - Un contour blanc autour du sprite du vaisseau-joueur.
+- Ajout d'une barre de chargement lorsque le joueur appuie sur espace pour charger le propulseur.
+
+### Changed
+- Changement de la mécanique de propulsion. Le joueur décide d'une propulsion initiale et ne peux plus modifier sa vitesse par la suite (A TERMINER).
 
 ### TO-DO
 - Corriger le bug de taille de l'image de transition.

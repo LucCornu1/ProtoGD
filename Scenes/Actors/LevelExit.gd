@@ -6,6 +6,7 @@ func get_class() -> String: return "LevelExit"
 
 
 # Export variables
+export(PackedScene) var next_level
 
 # Onready variables
 onready var area_2D : Area2D = get_node("Area2D")
@@ -42,4 +43,4 @@ func _process(_delta : float) -> void:
 func _on_body_entered(body : PhysicsBody2D) -> void:
 	if is_instance_valid(body):
 		if body.is_class("CharacterShip"):
-			print("Hello there" + body.name)
+			get_tree().change_scene_to(next_level)
