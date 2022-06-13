@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.5] - 13-06-2022
+### Added
+- Un contour blanc autour du sprite du vaisseau-joueur.
+
+### TO-DO
+- Corriger le bug de taille de l'image de transition.
+
 ## [0.0.4] - 12-06-2022
 ### Added
 - Sprite du vaisseau.
