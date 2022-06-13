@@ -30,7 +30,7 @@ void fragment()
 	COLOR = vec4(final_color.rgb, clamp(abs(alpha) + texture_color.a, 0.0, 1.0));
 	
 	// Charging bar
-	if (UV.y < charge)
+	if (UV.y > 1.0 - charge)
 	{
 		COLOR = vec4(1.0, 0.0, 0.0, COLOR.a);
 	}

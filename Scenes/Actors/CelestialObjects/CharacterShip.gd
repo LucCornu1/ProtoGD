@@ -128,7 +128,7 @@ func _process(_delta : float) -> void:
 		_charging(_delta)
 	
 	turn_ship()
-	print(current_thrusting_force.length())
+#	print(current_thrusting_force.length())
 
 
 #### VIRTUALS ####
@@ -159,9 +159,10 @@ func turn_ship() -> void:
 
 func _charging(_delta : float) -> void:
 	set_current_thruster_power(clamp(current_thruster_power + _delta * 10.0, 0.0, max_thruster_power))
+	print("Power" + str(current_thruster_power))
 	
-	var charge = current_thruster_power / max_thruster_power
-#	print(charge)
+	var charge : float = current_thruster_power / max_thruster_power
+	print("Charge" + str(charge))
 	animated_sprite_material.set_shader_param("charge", charge)
 
 #func init_shaders() -> void:
