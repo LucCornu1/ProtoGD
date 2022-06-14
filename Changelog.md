@@ -1,6 +1,18 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 14-06-2022
+### Added
+- Un gestionnaire de particule qui suit le joueur (en raison de l'impossibilité de déplacer un RigidBody2D avec une node Particle2D en enfant).
+- Une trainée de particules dû au réacteur lorsque le vaisseau-joueur est lancé.
+- La possibilité de diriger le vaisseau avant son lancement, afin de choisir une trajectoire.
+
+### TO-DO
+- Un bouton pour reset le niveau.
+- Faire perdre le joueur lorsque celui-ci sort trop longtemps du tableau (aka le niveau).
+- Ajouter des animations lorsque le joueur complète un niveau.
+- Ajouter une animation de transition différente lorsque le joueur passe au niveau supérieur.
+
 ## [0.0.5] - 13-06-2022
 ### Added
 - Un contour blanc autour du sprite du vaisseau-joueur.
@@ -27,7 +39,7 @@ All notable changes to this project will be documented in this file.
 - Le sprite du vaisseau-joueur a été mis à jour avec la ressource appropriée.
 
 ### TO-DO
-- Modifier la gestion de rotation du vaisseau-joueur.
+- Modifier la gestion de rotation du vaisseau-joueur. -- CANCELED
 
 ## [0.0.3] - 11-06-2022
 ### Added

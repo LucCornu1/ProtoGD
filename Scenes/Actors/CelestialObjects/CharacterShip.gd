@@ -29,6 +29,7 @@ var is_launched : bool = false setget set_is_launched, get_is_launched
 
 # Signals
 signal is_dead_changed
+signal is_launched_changed
 
 
 #### ACCESSORS ####
@@ -107,7 +108,7 @@ func get_is_dead() -> bool:
 func set_is_launched(new_value : bool) -> void:
 	if new_value != is_launched:
 		is_launched = new_value
-#		emit_signal()
+		emit_signal("is_launched_changed", is_launched)
 
 func get_is_launched() -> bool:
 	return is_launched
@@ -117,7 +118,9 @@ func get_is_launched() -> bool:
 func _ready() -> void:
 #	init_shaders()
 	var __ = connect("is_dead_changed", self, "_on_is_dead_changed")
+#	__ = connect("is_launched_changed", self, "_on_is_launched_changed", [is_launched])
 	
+	animation_player.play("RESET")
 	_new_angle = rotation
 
 func _physics_process(_delta : float) -> void:
@@ -128,6 +131,7 @@ func _process(_delta : float) -> void:
 		_charging(_delta)
 	
 	turn_ship()
+#	print(applied_force.length())
 #	print(current_thrusting_force.length())
 
 
@@ -153,27 +157,25 @@ func _compute_thrusting_force(_delta : float) -> void:
 	set_current_thrusting_force(Vector2(cos(_new_angle), sin(_new_angle)) * current_thruster_power)
 
 func turn_ship() -> void:
-	if !is_dead and is_launched:
+	if is_dead:
+		return
+		
+	if is_launched and linear_velocity != Vector2.ZERO:
 		set_new_angle(linear_velocity.angle()) #lerp(_new_angle, linear_velocity.angle(), 0.75))
+	else:
+		var mouse_pos : Vector2 = get_viewport().get_mouse_position()
+		var direction : Vector2 = position.direction_to(mouse_pos)
+		_new_angle = direction.angle()
+	
 	rotation = _new_angle
 
 func _charging(_delta : float) -> void:
 	set_current_thruster_power(clamp(current_thruster_power + _delta * 10.0, 0.0, max_thruster_power))
-	print("Power" + str(current_thruster_power))
+#	print("Power" + str(current_thruster_power))
 	
 	var charge : float = current_thruster_power / max_thruster_power
-	print("Charge" + str(charge))
+#	print("Charge" + str(charge))
 	animated_sprite_material.set_shader_param("charge", charge)
-
-#func init_shaders() -> void:
-#	var noise = OpenSimplexNoise.new()
-#	# Configure
-#	noise.seed = randi()
-#	noise.octaves = 4
-#	noise.period = 20.0
-#	noise.persistence = 0.8
-#
-#	animated_sprite_material.set_shader_param("dissolveNoise", noise.get_image(512, 512))
 
 func restart_scene() -> void:
 	var image : Image = get_viewport().get_texture().get_data()
@@ -208,6 +210,7 @@ func action(action_name : String) -> void:
 			set_is_launched(true)
 			_is_charging = false
 			animated_sprite_material.set_shader_param("charge", 0.0)
+#			particles_2D.set_emitting(true)
 			
 		_:
 			return
@@ -222,3 +225,6 @@ func _on_body_entered(body : PhysicsBody2D) -> void:
 func _on_is_dead_changed() -> void:
 	if is_dead:
 		animation_player.play("Death")
+
+func _on_is_launched_changed(value : bool) -> void:
+	pass

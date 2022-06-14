@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Levels/DefaultLevel.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Actors/CelestialObjects/CharacterShip.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Levels/TransitionSprite.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Levels/TestLevel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Actors/Particles/ParticleHandler.tscn" type="PackedScene" id=8]
 
 [node name="DefaultLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -25,14 +26,19 @@ texture = ExtResource( 5 )
 [node name="CelestialBodies" type="Node" parent="."]
 
 [node name="BarrenPlanet" parent="CelestialBodies" instance=ExtResource( 3 )]
-position = Vector2( 692, 495 )
+position = Vector2( 800, 540 )
 
 [node name="CharacterShip" parent="CelestialBodies" instance=ExtResource( 2 )]
-position = Vector2( 273, 475 )
+position = Vector2( 200, 540 )
 
-[node name="LevelExit" parent="." instance=ExtResource( 4 )]
-position = Vector2( 497, 489 )
+[node name="Other" type="Node" parent="."]
+
+[node name="LevelExit" parent="Other" instance=ExtResource( 4 )]
+position = Vector2( 1400, 540 )
 next_level = ExtResource( 7 )
 
-[node name="TransitionSprite" parent="." instance=ExtResource( 6 )]
+[node name="ParticleHandler" parent="Other" instance=ExtResource( 8 )]
+position = Vector2( 200, 540 )
+
+[node name="TransitionSprite" parent="Other" instance=ExtResource( 6 )]
 z_index = 100

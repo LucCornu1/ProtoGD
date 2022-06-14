@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://Scenes/Actors/LevelExit.gd"
 }, {
 "base": "Node2D",
+"class": "ParticleHandler",
+"language": "GDScript",
+"path": "res://Scenes/Actors/Particles/ParticleHandler.gd"
+}, {
+"base": "Node2D",
 "class": "TransitionSprite",
 "language": "GDScript",
 "path": "res://Scenes/Levels/TransitionSprite.gd"
@@ -45,6 +50,7 @@ _global_script_class_icons={
 "CharacterShip": "",
 "DefaultLevel": "",
 "LevelExit": "",
+"ParticleHandler": "",
 "TransitionSprite": ""
 }
 

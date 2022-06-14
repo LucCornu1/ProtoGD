@@ -7,8 +7,8 @@ func get_class() -> String: return "DefaultLevel"
 # Export variables
 
 # Onready variables
-onready var _ysort : YSort = get_node("YSort")
-onready var _character : CelestialObject = get_node_or_null("CelestialObject3")
+onready var character_ship : CharacterShip = get_node_or_null("CelestialBodies/CharacterShip")
+onready var particle_handler : Node2D = get_node_or_null("Other/ParticleHandler")
 
 # Variables
 
@@ -18,10 +18,16 @@ onready var _character : CelestialObject = get_node_or_null("CelestialObject3")
 
 #### BUILT-IN ####
 func _ready() -> void:
-	pass
+	var __ = character_ship.connect("is_launched_changed", particle_handler, "_on_playership_launched")
 
 func _physics_process(_delta : float) -> void:
 	pass
+
+func _process(_delta : float) -> void:
+	if is_instance_valid(character_ship) and is_instance_valid(particle_handler):
+		particle_handler.set_position(character_ship.get_position())
+		particle_handler.set_rotation(character_ship._new_angle)
+
 
 #### VIRTUALS ####
 

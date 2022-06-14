@@ -26,6 +26,7 @@ texture = ExtResource( 5 )
 
 [node name="BarrenPlanet" parent="CelestialBodies" instance=ExtResource( 3 )]
 position = Vector2( 692, 495 )
+mass = 250.0
 
 [node name="BarrenPlanet2" parent="CelestialBodies" instance=ExtResource( 3 )]
 position = Vector2( 1331, 587 )
