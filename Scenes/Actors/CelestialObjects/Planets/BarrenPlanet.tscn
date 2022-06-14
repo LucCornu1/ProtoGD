@@ -42,8 +42,10 @@ tracks/0/keys = {
 
 [node name="BarrenPlanet" instance=ExtResource( 1 )]
 mass = 150.0
+grav_scale = 10.0
 
 [node name="AnimatedSprite" parent="." index="0"]
+rotation = 0.654498
 frames = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]

@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BasePlanet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts&Ressources/Shaders/BlackHole_Shaders.tres" type="Material" id=3]
+[ext_resource path="res://Assets/Sprites/Black.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 73.1095
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 671.001
+
+[sub_resource type="Animation" id=5]
+resource_name = "BlackHole_Anim"
+length = 24.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 13, 24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -0.15, -0.05, -0.15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 24 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[node name="BlackHole" instance=ExtResource( 1 )]
+z_index = 99
+mass = 10000.0
+
+[node name="AnimatedSprite" parent="." index="0"]
+material = ExtResource( 3 )
+frames = SubResource( 2 )
+
+[node name="Black" type="Sprite" parent="AnimatedSprite" index="0"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="GravityWell" index="0"]
+shape = SubResource( 4 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "BlackHole_Anim"
+anims/BlackHole_Anim = SubResource( 5 )
+anims/RESET = SubResource( 6 )

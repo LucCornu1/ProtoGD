@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform sampler2D distortion_curve;
+uniform float strength : hint_range(-1, 1) = 0.5;
+uniform float marge : hint_range(0.0, 1.0) = 0.45;
+
+void fragment()
+{
+	vec2 vector_center = vec2(0.5, 0.5) - UV;
+	float distance_center = length(vector_center) * 1.2;
+	float curve_value = texture(distortion_curve, vec2(distance_center)).r;
+	vec2 diff = normalize(vector_center) * strength * curve_value;
+//
+//	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - diff);
+	
+	if ((UV.x > distance_center - marge && UV.x < 1.0 - distance_center + marge) && (UV.y > distance_center - marge && UV.y < 1.0 - distance_center + marge))
+		COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - diff);
+	else
+		COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+}"
+
+[sub_resource type="Curve" id=5]
+min_value = -1.0
+_data = [ Vector2( 0, 0.0113637 ), 0.0, 0.0, 0, 0, Vector2( 0.179348, 0.327273 ), 98.6909, 98.6909, 0, 0, Vector2( 0.380435, 0.345455 ), -9.55844, -4.04976, 0, 0, Vector2( 0.505435, -0.00681818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[resource]
+shader = SubResource( 3 )
+shader_param/strength = -0.130769
+shader_param/marge = 0.45
+shader_param/distortion_curve = SubResource( 6 )

@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Un gestionnaire de particule qui suit le joueur (en raison de l'impossibilité de déplacer un RigidBody2D avec une node Particle2D en enfant).
 - Une trainée de particules dû au réacteur lorsque le vaisseau-joueur est lancé.
 - La possibilité de diriger le vaisseau avant son lancement, afin de choisir une trajectoire.
+- Ajout d'un trou noir avec les effets de Shaders.
 
 ### TO-DO
 - Un bouton pour reset le niveau.

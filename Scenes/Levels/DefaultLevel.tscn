@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Levels/DefaultLevel.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Actors/CelestialObjects/CharacterShip.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Levels/TransitionSprite.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Levels/TestLevel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Actors/Particles/ParticleHandler.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BlackHole.tscn" type="PackedScene" id=9]
 
 [node name="DefaultLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -27,6 +28,13 @@ texture = ExtResource( 5 )
 
 [node name="BarrenPlanet" parent="CelestialBodies" instance=ExtResource( 3 )]
 position = Vector2( 800, 540 )
+contacts_reported = 1
+contact_monitor = true
+
+[node name="BlackHole" parent="CelestialBodies" instance=ExtResource( 9 )]
+position = Vector2( 1127, 640 )
+contacts_reported = 1
+contact_monitor = true
 
 [node name="CharacterShip" parent="CelestialBodies" instance=ExtResource( 2 )]
 position = Vector2( 200, 540 )
