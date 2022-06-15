@@ -143,7 +143,8 @@ func _compute_forces(_delta : float) -> void:
 		return
 	._compute_forces(_delta)
 	
-	applied_force = current_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle)) + current_gravity_force
+	if !is_sucked:
+		applied_force = current_thrusting_force.length() * Vector2(cos(_new_angle), sin(_new_angle)) + current_gravity_force
 ###	applied_force = applied_force.clamped(80.0) #DO NOT DELETE !! This as for effect to make orbiting 100x easier at the cost of realism
 
 
@@ -151,7 +152,7 @@ func _compute_forces(_delta : float) -> void:
 func _compute_thrusting_force(_delta : float) -> void:
 	if current_gravity_force.length_squared() > 0:
 		var scalaire = current_thrusting_force.normalized().dot(current_gravity_force.normalized())
-		set_current_thruster_power(current_thruster_power + scalaire * _delta * 1.5)
+		set_current_thruster_power(current_thruster_power + scalaire * _delta * 1.2)
 #		print(scalaire * _delta)
 #		print(current_thruster_power)
 	set_current_thrusting_force(Vector2(cos(_new_angle), sin(_new_angle)) * current_thruster_power)
@@ -187,10 +188,7 @@ func restart_scene() -> void:
 
 
 #### INPUTS ####
-func _input(event : InputEvent) -> void:
-	if !event is InputEventKey:
-		return
-	
+func _input(event : InputEvent) -> void:	
 	var action_name : String = ""
 	
 	if event.is_action_pressed("player_forward"):
@@ -199,19 +197,25 @@ func _input(event : InputEvent) -> void:
 	elif event.is_action_released("player_forward"):
 		action_name = "MoveForward_Released"
 	
+	elif event.is_action_pressed("reset"):
+		action_name = "reset_level"
+	
 	if action_name != "": action(action_name)
 
 func action(action_name : String) -> void:
 	match(action_name):
 		"MoveForward_Pressed":
 			_is_charging = true
-			
+		
 		"MoveForward_Released":
 			set_is_launched(true)
 			_is_charging = false
 			animated_sprite_material.set_shader_param("charge", 0.0)
 #			particles_2D.set_emitting(true)
-			
+		
+		"reset_level":
+			restart_scene()
+		
 		_:
 			return
 
@@ -224,6 +228,7 @@ func _on_body_entered(body : PhysicsBody2D) -> void:
 
 func _on_is_dead_changed() -> void:
 	if is_dead:
+		set_is_launched(false)
 		animation_player.play("Death")
 
 func _on_is_launched_changed(value : bool) -> void:

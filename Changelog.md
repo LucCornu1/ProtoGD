@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.7] - 15-06-2022
+### Added
+- Un bouton reset pour recommencer un niveau.
+
+### Changed
+- Correction d'un bug permettant au joueur d'échapper à la gravité d'un trou noir.
+
 ## [0.0.6] - 14-06-2022
 ### Added
 - Un gestionnaire de particule qui suit le joueur (en raison de l'impossibilité de déplacer un RigidBody2D avec une node Particle2D en enfant).
@@ -9,7 +16,7 @@ All notable changes to this project will be documented in this file.
 - Ajout d'un trou noir avec les effets de Shaders.
 
 ### TO-DO
-- Un bouton pour reset le niveau.
+- Un bouton pour reset le niveau. -- DONE
 - Faire perdre le joueur lorsque celui-ci sort trop longtemps du tableau (aka le niveau).
 - Ajouter des animations lorsque le joueur complète un niveau.
 - Ajouter une animation de transition différente lorsque le joueur passe au niveau supérieur.

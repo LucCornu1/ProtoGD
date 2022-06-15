@@ -31,6 +31,6 @@ curve = SubResource( 5 )
 
 [resource]
 shader = SubResource( 3 )
-shader_param/strength = -0.130769
+shader_param/strength = 0.3
 shader_param/marge = 0.45
 shader_param/distortion_curve = SubResource( 6 )
