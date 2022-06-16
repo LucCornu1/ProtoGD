@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.8] - 16-06-2022
+### Added
+- Ajout de boutons pour :
+	- Mettre le jeu en pause.
+	- Couper le son.
+	- Renvoyer au menu principal (TO-DO).
+- Le vaisseau ne se propulse pas lorsque que le joueur clique sur un bouton.
+
+### Changed
+- Changement de texture du portail de fin de niveau.
+
 ## [0.0.7] - 15-06-2022
 ### Added
 - Un bouton reset pour recommencer un niveau.

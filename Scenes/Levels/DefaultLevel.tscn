@@ -27,18 +27,18 @@ texture = ExtResource( 5 )
 [node name="CelestialBodies" type="Node" parent="."]
 
 [node name="BarrenPlanet" parent="CelestialBodies" instance=ExtResource( 3 )]
-position = Vector2( 2478, 772 )
+position = Vector2( 960, 540 )
 
 [node name="BlackHole" parent="CelestialBodies" instance=ExtResource( 9 )]
-position = Vector2( 960, 1015 )
+position = Vector2( 3172, 759 )
 
 [node name="CharacterShip" parent="CelestialBodies" instance=ExtResource( 2 )]
-position = Vector2( 134, 547 )
+position = Vector2( 130, 540 )
 
 [node name="Other" type="Node" parent="."]
 
 [node name="LevelExit" parent="Other" instance=ExtResource( 4 )]
-position = Vector2( 2175, 416 )
+position = Vector2( 1756, 540 )
 next_level = ExtResource( 7 )
 
 [node name="ParticleHandler" parent="Other" instance=ExtResource( 8 )]

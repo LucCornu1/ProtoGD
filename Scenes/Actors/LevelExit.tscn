@@ -1,31 +1,64 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Assets/Sprites/Ships/capital_ship_09.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/portail-2.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Actors/LevelExit.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/portail-1.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform vec4 color : hint_color;
+
+void fragment()
+{
+	vec4 texture_color = texture(TEXTURE, UV);
+	float brightness = (texture_color.r + texture_color.g + texture_color.b) / 3.0 + 0.8;
+	vec4 grayscale = vec4(brightness, brightness, brightness, texture_color.a);
+	
+	COLOR = grayscale * color;
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/color = Color( 1, 0.584314, 0, 1 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 1920, 1080 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 48 )
+region = Rect2( 0, 0, 1920, 1080 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "alternative",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 71.0
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 32.0
+height = 102.0
 
 [node name="LevelExit" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 2.5, 2.5 )
+material = SubResource( 7 )
+position = Vector2( 0, -35 )
 frames = SubResource( 2 )
+animation = "alternative"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )

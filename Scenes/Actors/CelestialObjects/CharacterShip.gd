@@ -14,10 +14,12 @@ export(float, 1.0, 10.0) var fuel_consumption_rate = 5.0 setget set_fuel_consump
 onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 onready var animated_sprite : AnimatedSprite = get_node("AnimatedSprite")
 onready var animated_sprite_material : Material = animated_sprite.get_material()
+onready var hud_node : CanvasLayer = get_node("HUD")
 
 # Variables
 var _new_angle : float = 0.0 setget set_new_angle, get_new_angle
 var _is_charging : bool = false
+var _is_valid : bool = true
 
 var current_thruster_power : float = 0.0 setget set_current_thruster_power, get_current_thruster_power
 var current_thrusting_force : Vector2 = Vector2.ZERO setget set_current_thrusting_force, get_current_thrusting_force
@@ -118,6 +120,7 @@ func get_is_launched() -> bool:
 func _ready() -> void:
 #	init_shaders()
 	var __ = connect("is_dead_changed", self, "_on_is_dead_changed")
+	__ = hud_node.connect("is_hovered_changed", self, "_on_is_hovered_changed")
 #	__ = connect("is_launched_changed", self, "_on_is_launched_changed", [is_launched])
 	
 	animation_player.play("RESET")
@@ -205,13 +208,15 @@ func _input(event : InputEvent) -> void:
 func action(action_name : String) -> void:
 	match(action_name):
 		"MoveForward_Pressed":
-			_is_charging = true
+			if !is_launched and _is_valid:
+				_is_charging = true
 		
 		"MoveForward_Released":
-			set_is_launched(true)
-			_is_charging = false
-			animated_sprite_material.set_shader_param("charge", 0.0)
-#			particles_2D.set_emitting(true)
+			if !is_launched and _is_valid:
+				set_is_launched(true)
+				_is_charging = false
+				animated_sprite_material.set_shader_param("charge", 0.0)
+	#			particles_2D.set_emitting(true)
 		
 		"reset_level":
 			restart_scene()
@@ -231,5 +236,5 @@ func _on_is_dead_changed() -> void:
 		set_is_launched(false)
 		animation_player.play("Death")
 
-func _on_is_launched_changed(value : bool) -> void:
-	pass
+func _on_is_hovered_changed(value : bool) -> void:
+	_is_valid = !value
