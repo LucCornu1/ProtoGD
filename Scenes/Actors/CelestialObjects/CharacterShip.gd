@@ -155,7 +155,7 @@ func _compute_forces(_delta : float) -> void:
 func _compute_thrusting_force(_delta : float) -> void:
 	if current_gravity_force.length_squared() > 0:
 		var scalaire = current_thrusting_force.normalized().dot(current_gravity_force.normalized())
-		set_current_thruster_power(current_thruster_power + scalaire * _delta * 1.2)
+		set_current_thruster_power(current_thruster_power + scalaire * _delta)
 #		print(scalaire * _delta)
 #		print(current_thruster_power)
 	set_current_thrusting_force(Vector2(cos(_new_angle), sin(_new_angle)) * current_thruster_power)

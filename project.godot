@@ -135,7 +135,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Proto Gd"
-run/main_scene="res://Scenes/Levels/DefaultLevel.tscn"
+run/main_scene="res://Scenes/Levels/Level_0.tscn"
 config/icon="res://icon.png"
 
 [autoload]

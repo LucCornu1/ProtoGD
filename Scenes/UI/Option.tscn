@@ -10,6 +10,7 @@
 [node name="Option" type="TextureButton"]
 margin_right = 64.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 focus_mode = 0
 script = ExtResource( 5 )
 

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.9] - 17-06-2022
+### Added
+- Un nouvel obstacle : l'étoile.
+- Quatre premiers niveaux.
+
 ## [0.0.8] - 16-06-2022
 ### Added
 - Ajout de boutons pour :

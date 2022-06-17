@@ -24,8 +24,8 @@ signal is_hovered_changed
 
 
 #### SIGNAL RESPONSES ####
-func _on_AlwaysOnScreen_mouse_entered():
+func _on_HBoxContainer_mouse_entered():
 	emit_signal("is_hovered_changed", true)
 
-func _on_AlwaysOnScreen_mouse_exited():
+func _on_HBoxContainer_mouse_exited():
 	emit_signal("is_hovered_changed", false)

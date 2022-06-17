@@ -20,34 +20,34 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 6 )
-shader_param/color = Color( 1, 0.584314, 0, 1 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 1920, 1080 )
+shader_param/color = Color( 0.639216, 0.968627, 0.905882, 1 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 1920, 1080 )
 
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 1920, 1080 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 5 ) ],
-"loop": true,
-"name": "alternative",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "alternative",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 32.0
-height = 102.0
+radius = 27.0
+height = 74.0
 
 [node name="LevelExit" type="Node2D"]
 script = ExtResource( 2 )
