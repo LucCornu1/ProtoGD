@@ -1,47 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Actors/CelestialObjects/CelestialObject.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BasePlanet.gd" type="Script" id=2]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform float dissolve_state : hint_range(0, 1) = 0.0;
-uniform sampler2D dissolve_noise;
-
-uniform float width : hint_range(0.0, 30.0);
-uniform vec4 outline_color : hint_color;
-
-void fragment()
-{
-    vec4 texture_color = texture(TEXTURE, UV);
-    
-    // Colored outline
-    float size = width / float(textureSize(TEXTURE, 0).x);
-    float alpha = -8.0 * texture_color.a;
-    alpha += texture(TEXTURE, UV + vec2(0.0, -size)).a;
-    alpha += texture(TEXTURE, UV + vec2(size, -size)).a;
-    alpha += texture(TEXTURE, UV + vec2(size, 0.0)).a;
-    alpha += texture(TEXTURE, UV + vec2(size, size)).a;
-    alpha += texture(TEXTURE, UV + vec2(0.0, size)).a;
-    alpha += texture(TEXTURE, UV + vec2(-size, size)).a;
-    alpha += texture(TEXTURE, UV + vec2(-size, 0.0)).a;
-    alpha += texture(TEXTURE, UV + vec2(-size, -size)).a;
-    vec4 final_color = mix(texture_color, outline_color, clamp(alpha, 0.0, 1.0));
-    COLOR = vec4(final_color.rgb, clamp(abs(alpha) + texture_color.a, 0.0, 1.0));
-    
-    
-    // Dissolve
-    float brightness = texture(dissolve_noise, UV).r;
-    // COLOR = texture_color;
-    COLOR.a *= step(dissolve_state, brightness);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/dissolve_state = 0.0
-shader_param/width = 2.0
-shader_param/outline_color = Color( 1, 1, 1, 1 )
+[ext_resource path="res://Scripts&Ressources/Shaders/BasePlanet_Shader.tres" type="Material" id=3]
 
 [node name="BasePlanet" instance=ExtResource( 1 )]
 mass = 1.0
@@ -50,7 +11,7 @@ script = ExtResource( 2 )
 grav_scale = 0.0
 
 [node name="AnimatedSprite" parent="." index="0"]
-material = SubResource( 2 )
+material = ExtResource( 3 )
 
 [node name="GravityWell" type="Area2D" parent="." index="2"]
 __meta__ = {

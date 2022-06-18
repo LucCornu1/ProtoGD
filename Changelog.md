@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.0] - 18-06-2022
+### Added
+- Ajout d'un menu avec ses boutons.
+- Connection des divers scènes entre elles.
+
+### TO-DO
+- Animations de transition de scène.
+- Faire perdre le joueur lorsque celui-ci sort trop longtemps du tableau (aka le niveau).
+
 ## [0.0.9] - 17-06-2022
 ### Added
 - Un nouvel obstacle : l'étoile.

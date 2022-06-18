@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/UI/Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Levels/GameLevels/Level_0.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+
+uniform float dissolve_state : hint_range(0, 1) = 0.0;
+uniform sampler2D dissolve_noise;
+
+uniform float width : hint_range(0.0, 100.0);
+uniform vec4 outline_color : hint_color;
+
+uniform float charge : hint_range(0.0, 1.0);
+
+void fragment()
+{
+	vec4 texture_color = texture(TEXTURE, UV);
+	
+	// Colored outline
+	float size = width / float(textureSize(TEXTURE, 0).x);
+	float alpha = -8.0 * texture_color.a;
+	alpha += texture(TEXTURE, UV + vec2(0.0, -size)).a;
+	alpha += texture(TEXTURE, UV + vec2(size, -size)).a;
+	alpha += texture(TEXTURE, UV + vec2(size, 0.0)).a;
+	alpha += texture(TEXTURE, UV + vec2(size, size)).a;
+	alpha += texture(TEXTURE, UV + vec2(0.0, size)).a;
+	alpha += texture(TEXTURE, UV + vec2(-size, size)).a;
+	alpha += texture(TEXTURE, UV + vec2(-size, 0.0)).a;
+	alpha += texture(TEXTURE, UV + vec2(-size, -size)).a;
+	vec4 final_color = mix(texture_color, outline_color, clamp(alpha, 0.0, 1.0));
+	COLOR = vec4(final_color.rgb, clamp(abs(alpha) + texture_color.a, 0.0, 1.0));
+	
+	// Charging bar
+	if (UV.y > 1.0 - charge)
+	{
+		COLOR = vec4(1.0, 0.0, 0.0, COLOR.a);
+	}
+	
+	// Dissolve
+	float brightness = texture(dissolve_noise, UV).r;
+	// COLOR = texture_color;
+	COLOR.a *= step(dissolve_state, brightness);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=12]
+
+[sub_resource type="NoiseTexture" id=13]
+seamless = true
+noise = SubResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=14]
+resource_local_to_scene = true
+shader = SubResource( 10 )
+shader_param/dissolve_state = 0.0
+shader_param/width = 30.0
+shader_param/outline_color = Color( 1, 1, 1, 1 )
+shader_param/charge = 0.0
+shader_param/dissolve_noise = SubResource( 13 )
+
+[node name="PlayButton" instance=ExtResource( 1 )]
+next_level = ExtResource( 2 )
+
+[node name="TextureRect" parent="." index="1"]
+material = SubResource( 14 )

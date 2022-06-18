@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/UI/Buttons/Buttons_Menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/Star.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BlackHole.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BarrenPlanet.tscn" type="PackedScene" id=5]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 960, 540 )
+texture = ExtResource( 1 )
+
+[node name="BarrenPlanet" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1790, 1058 )
+
+[node name="BlackHole" parent="." instance=ExtResource( 4 )]
+position = Vector2( 295, 666 )
+
+[node name="Star" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1212, 201 )
+
+[node name="Control" parent="." instance=ExtResource( 2 )]

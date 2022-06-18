@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Sprites/bouton.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Ships/vaisseau-1a-illu2.png" type="Texture" id=2]
+[ext_resource path="res://Scripts&Ressources/Chromia.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scenes/UI/Button.gd" type="Script" id=4]
+[ext_resource path="res://Scripts&Ressources/Shaders/CharacterShip_Shaders.tres" type="Material" id=5]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 26.7 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Rotation"
+length = 24.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 12, 24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 26.7, 206.7, 386.7 ]
+}
+
+[sub_resource type="DynamicFont" id=1]
+size = 38
+extra_spacing_bottom = 10
+font_data = ExtResource( 3 )
+
+[node name="Button" type="NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -50.0
+margin_right = 200.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 400, 100 )
+texture = ExtResource( 1 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+script = ExtResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_right = 300.0
+margin_bottom = 75.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource( 5 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -85.0
+margin_top = -54.5
+margin_right = -5.0
+margin_bottom = 45.5
+rect_rotation = 26.7
+rect_pivot_offset = Vector2( 40, 50 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect"]
+anims/RESET = SubResource( 3 )
+anims/Rotation = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -37.5
+margin_right = 197.0
+margin_bottom = 37.5
+custom_fonts/font = SubResource( 1 )
+text = "Jouer"
+align = 1
+valign = 1
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_TextureButton_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_TextureButton_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
