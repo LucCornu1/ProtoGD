@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 - Ajout de bordures autour du niveau. Lorsque le joueur touche une bordure, le niveau recommence.
 
 ### Changed
-- Bug fix
+- Bug fix : correction du bug lors de la transition de scène. Certaines résolutions induisaient des erreurs.
 
 ## [0.1.0] - 18-06-2022
 ### Added
