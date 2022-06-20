@@ -15,6 +15,7 @@ onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 onready var animated_sprite : AnimatedSprite = get_node("AnimatedSprite")
 onready var animated_sprite_material : Material = animated_sprite.get_material()
 onready var hud_node : CanvasLayer = get_node("HUD")
+onready var restart_button : Option = get_node_or_null("HUD/AlwaysOnScreen/HBoxContainer/RestartOption")
 
 # Variables
 var _new_angle : float = 0.0 setget set_new_angle, get_new_angle
@@ -121,6 +122,9 @@ func _ready() -> void:
 #	init_shaders()
 	var __ = connect("is_dead_changed", self, "_on_is_dead_changed")
 	__ = hud_node.connect("is_hovered_changed", self, "_on_is_hovered_changed")
+	
+	if is_instance_valid(restart_button):
+		__ = restart_button.connect("Restart", self, "restart_scene")
 #	__ = connect("is_launched_changed", self, "_on_is_launched_changed", [is_launched])
 	
 	animation_player.play("RESET")
@@ -134,6 +138,7 @@ func _process(_delta : float) -> void:
 		_charging(_delta)
 	
 	turn_ship()
+	check_distance()
 #	print(applied_force.length())
 #	print(current_thrusting_force.length())
 
@@ -172,6 +177,13 @@ func turn_ship() -> void:
 		_new_angle = direction.angle()
 	
 	rotation = _new_angle
+
+func check_distance() -> void:
+	if position.x < -150.0 or position.x > 2070.0:
+		restart_scene()
+	
+	if position.y < -150.0 or position.y > 1230.0:
+		restart_scene()
 
 func _charging(_delta : float) -> void:
 	set_current_thruster_power(clamp(current_thruster_power + _delta * 10.0, 0.0, max_thruster_power))

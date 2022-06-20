@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/UI/Options/ExitOption.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Options/SoundOption.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/UI/Options/PauseOption.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/UI/HUD.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/UI/Options/RestartOption.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="CanvasLayer"]
 pause_mode = 2
@@ -29,6 +30,10 @@ mouse_filter = 1
 margin_left = 136.0
 margin_right = 200.0
 mouse_filter = 1
+
+[node name="RestartOption" parent="AlwaysOnScreen/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 204.0
+margin_right = 268.0
 
 [connection signal="mouse_entered" from="AlwaysOnScreen/HBoxContainer" to="." method="_on_HBoxContainer_mouse_entered"]
 [connection signal="mouse_exited" from="AlwaysOnScreen/HBoxContainer" to="." method="_on_HBoxContainer_mouse_exited"]

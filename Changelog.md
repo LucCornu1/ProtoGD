@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 20-06-2022
+### Added
+- Ajout d'un bouton restart.
+- Ajout de bordures autour du niveau. Lorsque le joueur touche une bordure, le niveau recommence.
+
+### Changed
+- Bug fix
+
 ## [0.1.0] - 18-06-2022
 ### Added
 - Ajout d'un menu avec ses boutons.
