@@ -153,7 +153,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Proto Gd"
-run/main_scene="res://Scenes/Levels/GameLevels/Level_0.tscn"
+run/main_scene="res://Scenes/Levels/GameLevels/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

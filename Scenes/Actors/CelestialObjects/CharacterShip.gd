@@ -21,6 +21,7 @@ onready var restart_button : Option = get_node_or_null("HUD/AlwaysOnScreen/HBoxC
 var _new_angle : float = 0.0 setget set_new_angle, get_new_angle
 var _is_charging : bool = false
 var _is_valid : bool = true
+var _level_ready : bool = false
 
 var current_thruster_power : float = 0.0 setget set_current_thruster_power, get_current_thruster_power
 var current_thrusting_force : Vector2 = Vector2.ZERO setget set_current_thrusting_force, get_current_thrusting_force
@@ -203,7 +204,9 @@ func restart_scene() -> void:
 
 
 #### INPUTS ####
-func _input(event : InputEvent) -> void:	
+func _input(event : InputEvent) -> void:
+	if !Singleton.level_ready:
+		return
 	var action_name : String = ""
 	
 	if event.is_action_pressed("player_forward"):

@@ -7,3 +7,4 @@
 
 [node name="LevelExit" parent="Other" index="0"]
 next_level = ExtResource( 2 )
+next_level_name = "Fg = (G*m1*m2)/d"
