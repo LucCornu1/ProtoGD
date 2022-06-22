@@ -27,3 +27,4 @@ signal Restart
 func _on_button_pressed() -> void:
 	._on_button_pressed()
 	emit_signal("Restart")
+	Singleton.level_ready = true

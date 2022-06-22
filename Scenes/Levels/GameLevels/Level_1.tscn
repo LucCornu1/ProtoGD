@@ -8,6 +8,7 @@
 
 [node name="LevelExit" parent="Other" index="0"]
 next_level = ExtResource( 3 )
+next_level_name = "Masse et Poids"
 
 [node name="BarrenPlanet" parent="." index="4" instance=ExtResource( 2 )]
 position = Vector2( 1103, 540 )

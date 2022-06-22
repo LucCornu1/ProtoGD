@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 22-06-2022
+### Added
+- Ajout d'un canal d'information par intérêt.
+- Ajout d'un bouton "information".
+
+### Changed
+- Correction de bug.
+
 ## [0.1.2] - 21-06-2022
 ### Added
 - Un écran de transition entre les différents niveaux, avec le nom du niveau affiché.

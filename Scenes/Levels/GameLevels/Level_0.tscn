@@ -4,7 +4,8 @@
 [ext_resource path="res://Scenes/Levels/GameLevels/Level_1.tscn" type="PackedScene" id=2]
 
 [node name="Level_0" instance=ExtResource( 1 )]
+level_information = "L'accélération est égale à la somme des forces divisé par sa masse"
 
 [node name="LevelExit" parent="Other" index="0"]
 next_level = ExtResource( 2 )
-next_level_name = "Fg = (G*m1*m2)/d"
+next_level_name = "Puit de gravité"
