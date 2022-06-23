@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Levels/DefaultLevel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/Star.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BarrenPlanet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Levels/GameLevels/Level_3.tscn" type="PackedScene" id=3]
 
 [node name="Level_2" instance=ExtResource( 1 )]
+level_information = "Dans la vie courante, nous utilisons à tort le mots poids. C'est en réalité la force d'attraction gravitationnelle exercée par la terre sur un objet possédant une masse !"
 
-[node name="Star" parent="." index="4" instance=ExtResource( 2 )]
-position = Vector2( 994, 544 )
+[node name="BarrenPlanet" parent="CelestialBodies" index="0" instance=ExtResource( 2 )]
+position = Vector2( 677, 355 )
+
+[node name="BarrenPlanet2" parent="CelestialBodies" index="1" instance=ExtResource( 2 )]
+position = Vector2( 1272, 555 )
+
+[node name="LevelExit" parent="Other" index="0"]
+next_level = ExtResource( 3 )
+next_level_name = "Puit de gravité"

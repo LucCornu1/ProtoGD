@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Levels/DefaultLevel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BarrenPlanet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/Star.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Levels/GameLevels/Level_4.tscn" type="PackedScene" id=3]
 
 [node name="Level_3" instance=ExtResource( 1 )]
+level_information = "Chaque objet déforme l'espace autour de lui, comme une balle posée sur un tissu tendu. Plus l'objet est lourd, plus ce \"puit\" est grand, et plus il est difficile d'en échapper."
 
-[node name="BarrenPlanet" parent="." index="4" instance=ExtResource( 2 )]
-position = Vector2( 606, 438 )
+[node name="LevelExit" parent="Other" index="0"]
+next_level = ExtResource( 3 )
 
-[node name="BarrenPlanet2" parent="." index="5" instance=ExtResource( 2 )]
-position = Vector2( 1235, 438 )
+[node name="Star" parent="." index="4" instance=ExtResource( 2 )]
+position = Vector2( 1077, 540 )

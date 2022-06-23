@@ -22,7 +22,7 @@ animations = [ {
 radius = 62.514
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 671.001
+radius = 794.01
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 128.035
@@ -97,8 +97,7 @@ tracks/2/keys = {
 }
 
 [node name="BlackHole" instance=ExtResource( 1 )]
-z_index = 99
-mass = 9000.0
+mass = 3000.0
 script = ExtResource( 2 )
 grav_scale = 1.0
 

@@ -5,10 +5,11 @@
 [ext_resource path="res://Scenes/Levels/GameLevels/Level_2.tscn" type="PackedScene" id=3]
 
 [node name="Level_1" instance=ExtResource( 1 )]
+level_information = "Deux objets possédant une masse s'attirent entre eux. La terre exerce une force sur vous, et vous exercés la même force contraire sur la terre. Si la terre ne bouge pas, c'est qu'elle est beaucoup plus massif."
+
+[node name="BarrenPlanet" parent="CelestialBodies" index="0" instance=ExtResource( 2 )]
+position = Vector2( 1103, 540 )
 
 [node name="LevelExit" parent="Other" index="0"]
 next_level = ExtResource( 3 )
 next_level_name = "Masse et Poids"
-
-[node name="BarrenPlanet" parent="." index="4" instance=ExtResource( 2 )]
-position = Vector2( 1103, 540 )

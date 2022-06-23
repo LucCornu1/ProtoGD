@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Levels/DefaultLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Actors/CelestialObjects/Planets/BlackHole.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Levels/GameLevels/Menu.tscn" type="PackedScene" id=3]
+
+[node name="Level_5" instance=ExtResource( 1 )]
+level_information = "Plus un objet est loin, moins sa force se fait ressentir. Il existe des objets si massif que rien ne s'en échappe, même pas la lumière. On appelle ces objets des \"trous noirs\"."
+
+[node name="BlackHole" parent="CelestialBodies" index="1" instance=ExtResource( 2 )]
+position = Vector2( 1061, 805 )
+
+[node name="LevelExit" parent="Other" index="0"]
+next_level = ExtResource( 3 )
+next_level_name = "Masse et Accéleration"

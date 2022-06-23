@@ -4,8 +4,8 @@
 [ext_resource path="res://Scenes/Levels/GameLevels/Level_1.tscn" type="PackedScene" id=2]
 
 [node name="Level_0" instance=ExtResource( 1 )]
-level_information = "L'accélération est égale à la somme des forces divisé par sa masse"
+level_information = "L'accélération est égale à la somme des forces divisé par sa masse. Donc plus un objet est massif, plus la force nécessaire pour le propulser doit être importante !"
 
 [node name="LevelExit" parent="Other" index="0"]
 next_level = ExtResource( 2 )
-next_level_name = "Puit de gravité"
+next_level_name = "Gravitation"

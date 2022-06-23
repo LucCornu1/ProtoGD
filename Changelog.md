@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 23-06-2022
+### Changed
+- Le level design a été modifié.
+- Les informations ont été mise à jour.
+
 ## [0.1.3] - 22-06-2022
 ### Added
 - Ajout d'un canal d'information par intérêt.
