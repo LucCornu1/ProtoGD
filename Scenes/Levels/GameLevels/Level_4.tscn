@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Levels/GameLevels/Level_5.tscn" type="PackedScene" id=4]
 
 [node name="Level_4" instance=ExtResource( 1 )]
+level_information = "/"
 
 [node name="Star" parent="CelestialBodies" index="0" instance=ExtResource( 3 )]
 position = Vector2( 1299, 359 )
