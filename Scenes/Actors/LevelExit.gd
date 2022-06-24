@@ -44,5 +44,8 @@ func _process(_delta : float) -> void:
 func _on_body_entered(body : PhysicsBody2D) -> void:
 	if is_instance_valid(body):
 		if body.is_class("CharacterShip"):
-			Singleton.level_name = next_level_name
-			get_tree().change_scene_to(next_level)
+			if next_level != null:
+				Singleton.level_name = next_level_name
+				get_tree().change_scene_to(next_level)
+			else:
+				get_tree().change_scene("res://Scenes/Levels/GameLevels/Menu.tscn")
